@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         ]
     }
     
-    func askQuestion() {
+    func askQuestion(action: UIAlertAction! = nil) {
         countries.shuffle()
         
         firstFlag.setImage(UIImage(named: countries[0]), for: .normal)
@@ -63,7 +63,21 @@ class ViewController: UIViewController {
         
         title = countries[correctAnswer].uppercased()
     }
-
+    @IBAction func flagTapped(_ sender: UIButton) {
+        var title: String
+        
+        if sender.tag == correctAnswer {
+            title = "Correct"
+            score += 1
+        } else {
+            title = "Wrong"
+            score -= 1
+        }
+        
+        let alertController = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
+        present(alertController, animated: true)
+    }
 
 }
 
