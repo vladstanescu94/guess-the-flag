@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet var thirdFlag: UIButton!
     
     var countries = [String]()
+    var correctAnswer = 0
     var score = 0
     
     override func viewDidLoad() {
@@ -52,9 +53,15 @@ class ViewController: UIViewController {
     }
     
     func askQuestion() {
+        countries.shuffle()
+        
         firstFlag.setImage(UIImage(named: countries[0]), for: .normal)
         secondFlag.setImage(UIImage(named: countries[1]), for: .normal)
         thirdFlag.setImage(UIImage(named: countries[2]), for: .normal)
+        
+        correctAnswer = Int.random(in: 0...2)
+        
+        title = countries[correctAnswer].uppercased()
     }
 
 
